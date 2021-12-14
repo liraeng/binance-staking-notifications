@@ -29,13 +29,18 @@ while True:
                     "APY": str(round(float(asset["config"]["annualInterestRate"])*100, 2))
                 })
 
+    printed = False
     for line in target_assets:
         name, period = line.split(" ")
         for item in avaliables:
             if name == item["asset"] and period == item["duration"]:
+                printed = True
                 print(f"************\n"\
                     f"Binance Locked Stacking\n"
                     f"{item['asset']} for {item['duration']}d / {item['APY']}% APY\n***\n**\n\n")
     
+    if not printed:
+        print("----")
+
     # time loop waiting
     time.sleep(timedelta(minutes=check_every).total_seconds())
